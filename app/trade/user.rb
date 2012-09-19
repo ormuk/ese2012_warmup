@@ -1,3 +1,50 @@
 class User
-  
+  attr_accessor :name, :credits, :items
+
+  def initialize(name)
+    @name = name
+    #users start with 100 credits
+    @credits = 100
+    @items = Array.new
+    self
+  end
+
+
+  def add_item(item)
+    item.owner = self
+    @items.push(item)
+  end
+
+  def buy(item)
+    if @credits >= item.price
+      item.owner.credits = item.owner.credits + item.price
+      item.owner.items.delete(item)
+      @credits = @credits - item.price
+      item.owner = self
+      item.state = :inactive
+      @items.push(item)
+    else
+        #TODO Fehlermeldung oder Exception?
+    end
+  end
+
+  def list_items_to_sell
+    puts "active items of user #{@name}:"
+    active = @items.select {|item| item.state == :active}
+    active.each do |item|
+      puts item
+    end
+    active
+  end
+
+  def list_items
+    puts "all items of user #{@name}:"
+    @items.each do |item|
+      puts item
+    end
+  end
+
+  def to_s
+    #TODO
+  end
 end
