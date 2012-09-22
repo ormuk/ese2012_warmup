@@ -90,6 +90,14 @@ class UserTest < Test::Unit::TestCase
     @suti.buy(@macbook)
   end
 
+  def test_to_s
+    @suti.add_item(@macbook)
+    assert("#{@suti}" == "User Suti: 100 credits, 1 items, 0 items to sell.\n")
+    @suti.add_item(@iphone)
+    assert("#{@suti}" == "User Suti: 100 credits, 2 items, 0 items to sell.\n")
+    @iphone.state= :active
+    assert("#{@suti}" == "User Suti: 100 credits, 2 items, 1 items to sell.\n")
+  end
 
   # Called after every test method runs. Can be used to tear
   # down fixture information.

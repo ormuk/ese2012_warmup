@@ -21,7 +21,7 @@ class User
     elsif item.state == :inactive
       print("User #{@name} can't buy item #{item.name} from user #{item.owner.name}, it's inactive.\n")
     elsif @credits < item.price
-        print("User #{@name} does not have enough credits to buy item #{item.name} from user #{item.owner.name}\n")
+        print("User #{@name} does not have enough credits to buy item #{item.name} from user #{item.owner.name}.\n")
         #TODO Fehlermeldung oder Exception? Braucht es eine exception?
     else
       item.owner.credits = item.owner.credits + item.price
@@ -38,7 +38,7 @@ class User
   end
 
   def list_items_to_sell
-    puts "active items of user #{@name}:"
+    puts "Active items of user #{@name}:"
     active_items.each do |item|
       puts item
     end
@@ -46,7 +46,7 @@ class User
   end
 
   def list_items
-    puts "all items of user #{@name}:"
+    puts "All items of user #{@name}:"
     @items.each do |item|
       puts item
     end
