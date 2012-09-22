@@ -73,12 +73,21 @@ class UserTest < Test::Unit::TestCase
      @ipod.state= :active
      @florian.buy(@macbook)
      @florian.buy(@ipod)
-     @suti.buy(@iphone)
      @florian.buy(@iphone)
+    assert(@florian.items.include?(@macbook))
+   assert(@florian.items.include?(@ipod))
+    assert(@suti.items.include?(@iphone))
   end
 
   def test_buy_fail_state
-    #TODO buy a item with state :inactive
+    @suti.add_item(@macbook)
+    assert(@suti.items.include? @macbook)
+    @florian.buy(@macbook)
+  end
+
+  def test_buy_fail_owner
+    @suti.add_item(@macbook)
+    @suti.buy(@macbook)
   end
 
 

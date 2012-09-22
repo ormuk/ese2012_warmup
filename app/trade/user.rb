@@ -18,9 +18,11 @@ class User
   def buy(item)
     if item.owner == self
        print("User #{@name} can't buy item #{item.name} from himself!\n")
+    elsif item.state == :inactive
+      print("User #{@name} can't buy item #{item.name} from user #{item.owner.name}, it's inactive.\n")
     elsif @credits < item.price
         print("User #{@name} does not have enough credits to buy item #{item.name} from user #{item.owner.name}\n")
-        #TODO Fehlermeldung oder Exception?
+        #TODO Fehlermeldung oder Exception? Braucht es eine exception?
     else
       item.owner.credits = item.owner.credits + item.price
       item.owner.items.delete(item)
