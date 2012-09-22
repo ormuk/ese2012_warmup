@@ -16,25 +16,31 @@ class User
   end
 
   def buy(item)
-    if @credits >= item.price
+    if item.owner == self
+       print("User #{@name} can't buy item #{item.name} from himself!\n")
+    elsif @credits < item.price
+        print("User #{@name} does not have enough credits to buy item #{item.name} from user #{item.owner.name}\n")
+        #TODO Fehlermeldung oder Exception?
+    else
       item.owner.credits = item.owner.credits + item.price
       item.owner.items.delete(item)
       @credits = @credits - item.price
       item.owner = self
       item.state = :inactive
       @items.push(item)
-    else
-        #TODO Fehlermeldung oder Exception?
     end
+  end
+
+  def active_items
+    active = @items.select {|item| item.state == :active}
   end
 
   def list_items_to_sell
     puts "active items of user #{@name}:"
-    active = @items.select {|item| item.state == :active}
-    active.each do |item|
+    active_items.each do |item|
       puts item
     end
-    active
+    active_items
   end
 
   def list_items
@@ -45,6 +51,6 @@ class User
   end
 
   def to_s
-    #TODO
+    "User #{@name}: #{@credits} credits, #{@items.length} items, #{active_items.length} items to sell.\n"
   end
 end
