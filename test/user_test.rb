@@ -39,15 +39,12 @@ class UserTest < Test::Unit::TestCase
 
 
   def test_list_items_to_sell
-    macbook = Item.new("macbook",50)
-    ipod = Item.new("ipod",50)
+    @suti.add_item(@macbook)
+    @suti.add_item(@ipod)
 
-    @suti.add_item(macbook)
-    @suti.add_item(ipod)
-
-    macbook.state = :active
+    @macbook.state = :active
     assert(@suti.list_items_to_sell.length == 1)
-    ipod.state = :active
+    @ipod.state = :active
     assert(@suti.list_items_to_sell.length == 2)
   end
 
@@ -104,13 +101,6 @@ class UserTest < Test::Unit::TestCase
     assert("#{@suti}" == "User Suti: 100 credits, 2 items, 0 items to sell.\n")
     @iphone.state= :active
     assert("#{@suti}" == "User Suti: 100 credits, 2 items, 1 items to sell.\n")
-  end
-
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  def teardown
-    # Do nothing
   end
 
 end
