@@ -12,7 +12,11 @@ class User
 
   def add_item(item)
     item.owner = self
+    if (!@items.include?(item))
     @items.push(item)
+    else
+      puts "item already added to the list"
+    end
   end
 
   def buy(item)

@@ -30,6 +30,13 @@ class UserTest < Test::Unit::TestCase
     assert(@suti.items.include?(@ipod))
   end
 
+  def test_add_item_twice
+    @suti.add_item(@macbook)
+    @suti.add_item(@macbook)
+    assert(@suti.items.length == 1)
+    assert(@suti.items.include?(@macbook))
+  end
+
 
   def test_list_items_to_sell
     macbook = Item.new("macbook",50)

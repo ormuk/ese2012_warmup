@@ -1,24 +1,13 @@
 require "test/unit"
+require "../app/trade/item"
 
 class ItemTest < Test::Unit::TestCase
 
-  # Called before every test method runs. Can be used
-  # to set up fixture information.
-  def setup
-    # Do nothing
+  def test_create_item
+    item = Item.new("book", 25)
+    assert(item.name == "book")
+    assert(item.price == 25)
+    assert(item.state == :inactive)
   end
 
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  def teardown
-    # Do nothing
-  end
-
-  # Fake test
-  def test_fail
-
-    # To change this template use File | Settings | File Templates.
-    fail("Not implemented")
-  end
 end
